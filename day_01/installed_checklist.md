@@ -1,5 +1,5 @@
 # Installation
-- [ ] Python + libraries: [Anaconda](http://continuum.io/downloads)
+- [ ] Python + libraries: [Anaconda](http://continuum.io/downloads) (version 2.2 or later)
 - [ ] Text editor: [Atom](https://atom.io/)
 - [ ] Version control: [Git](https://git-scm.com/)
   - When running the installer, the default settings are good— no need to monkey with them.   
