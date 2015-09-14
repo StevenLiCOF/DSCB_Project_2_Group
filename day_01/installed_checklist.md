@@ -8,5 +8,5 @@
 # Configuration
 - [ ] Setup the proxy for Git
   - Save [this file](proxy.bashrc) as “.bashrc” (note the leading dot, no
-    extension) in the subdirectory “C:\Users\\<your EID>”
+    extension) in the subdirectory “C:\Users\\(your EID)”
 - [ ] \(optional\) [Setup GitHub SSH keys](https://help.github.com/articles/generating-ssh-keys/#step-4-add-your-ssh-key-to-your-account)
