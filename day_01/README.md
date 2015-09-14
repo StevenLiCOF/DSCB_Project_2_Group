@@ -2,8 +2,11 @@
 
 10:45am - **Python Assessment** A short quiz to help the instructors adjust the content of the class to a good skill level for everybody.
 
-11:15am - **Installation + Configuration** We make sure everybody's computers have everything needed for the rest of the class.
+11:15am - [**Installation + Configuration**](git_challenge.md) We make sure everybody's computers have everything needed for the rest of the class.
 
 12:00pm - **Lunch!** And outside world catch-up time.
 
-1:30pm - **Version Control with Git + GitHub** - Lecture + Challenges
+1:30pm - **Version Control with Git + GitHub**
+- [Slides](https://github.com/thisismetis/capitalone-pilottwo/blob/master/01-git/git_slides.pdf)
+- [Handout](https://github.com/thisismetis/capitalone-pilottwo/blob/master/01-git/README.md)
+- [Challenges](git_challenge.md)
