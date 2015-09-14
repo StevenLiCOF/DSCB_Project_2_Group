@@ -21,7 +21,7 @@ This link should also work: http://en.wikipedia.org
 2. Second item in the list
   * First sub-bullet
   * Second sub-bullet
-  * ~Whoops, not this one~~
+  * ~~Whoops, not this one~~
 
 # Block quotes
 > The path of the righteous man is beset on all sides by the inequities of the selfish and the tyranny of evil men.
@@ -62,4 +62,7 @@ def sample_function(a,b,c):
 - [ ] Get SSH key working
 
 # I wonder if this will link to a GitHub Issue
-#30
+Issue #30
+
+# In-line code
+Just naming the function `<sample_funcion2>`
