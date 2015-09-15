@@ -8,7 +8,8 @@ CapitalOne Metis Data Science Python Bootcamp Pilot Extravaganza 2K15.
 import os
 
 # constants
-DATA_DIR = os.path.abspath('data')
+CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+DATA_DIR = os.path.abspath(os.path.join(CURRENT_DIR, 'data'))
 MOJO_DIR = os.path.join(DATA_DIR, 'boxofficemojo')
 
 
