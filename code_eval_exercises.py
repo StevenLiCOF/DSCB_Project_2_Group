@@ -25,7 +25,7 @@ def compare_points(O,P,Q,R):
 def compare_points(O,P,Q,R):
     ''' My attempt at more compact script using a library'''
     import numpy as np
-    [diffdir=(np.sign(Q-O),np.sign(R-P))]
+    diffdir=(np.sign(Q-O),np.sign(R-P))
     dirmap={(-1,-1): 'SW',
         (-1,0): 'W',
         (-1,1): 'NW',
