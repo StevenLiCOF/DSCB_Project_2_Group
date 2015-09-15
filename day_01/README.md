@@ -2,7 +2,7 @@
 
 10:45am - **Python Assessment** A short quiz to help the instructors adjust the content of the class to a good skill level for everybody.
 
-11:15am - [**Installation + Configuration**](git_challenge.md) We make sure everybody's computers have everything needed for the rest of the class.
+11:15am - [**Installation + Configuration**](installed_checklist.md) We make sure everybody's computers have everything needed for the rest of the class.
 
 12:00pm - **Lunch!** And outside world catch-up time.
 
