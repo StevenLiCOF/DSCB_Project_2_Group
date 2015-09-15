@@ -9,5 +9,6 @@
 
 ## Challenges
 - [Python](python_challenges.md)
-
+- [Modeling](modeling_challenges.md)
+- [Data Visualization](dataviz_challenges.md)
 Tomorrow you receive your teams for Project 1! Get excited!
