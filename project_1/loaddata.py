@@ -61,6 +61,5 @@ def load_and_merge_movies():
             intersection.append(movie)
     return intersection
 
-
 if __name__=="__main__":
     load_and_merge_movies()
