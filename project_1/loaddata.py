@@ -8,7 +8,7 @@ CapitalOne Metis Data Science Python Bootcamp Pilot Extravaganza 2K15.
 import os
 import json
 import pprint
-import datetime
+from datetime import datetime
 
 # constants
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -38,28 +38,21 @@ def convert_date(field):
     formatteddate=datetime.date(year,month,day)
     return formatteddate
 
-def merge_lists(l1, l2, key):
-    merged = {}
-    for item in l1+l2:
-        if item[key] in merged:
-            merged[item[key]].update(item)
-        else:
-            merged[item[key]] = item
-    return [val for (_, val) in merged.items()]
-
 def load_and_merge_movies():
     mojomovies=get_movies(MOJO_DIR)
     metacriticmovies=get_movies(METACRITIC_DIR)
     for movie in mojomovies:
-        movie['release_date_limited']=convert_date(movie['release_date_limited'])
-        movie['release_date_wide']=convert_date(movie['release_date_wide'])
-    union=merge_lists(mojomovies,metacriticmovies,'title')
-    intersection=[]
-    for movie in union:
-        if movie['title'] in list(set([mojomovie['title'] for mojomovie in mojomovies]) &
-                                  set([metacriticmovie['title'] for metacriticmovie in metacriticmovies])):
-            intersection.append(movie)
-    return intersection
+        if movie['release_date_limited']:
+            movie['release_date_limited']=datetime.strptime(movie['release_date_limited'],'%Y-%m-%d').date()
+        if movie['release_date_wide']:
+            movie['release_date_wide']=datetime.strptime(movie['release_date_wide'],'%Y-%m-%d').date()
+    output_dict={}
+    for mojomovie in mojomovies:
+        for metamovie in metacriticmovies:
+            if mojomovie['title'] == metamovie['title']:
+                entry=mojomovie
+                entry.update(metamovie)
+                output_dict.append(entry)
 
 if __name__=="__main__":
     load_and_merge_movies()
