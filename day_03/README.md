@@ -8,4 +8,4 @@
 * 1:00 - Welcome to Project 1. Description, groups, goals.
 * 1:15 - Project work starts
 * 4:00 - Model Selection II
-* 4:30 - Dismiss
+* 4:30 - Freedom!
