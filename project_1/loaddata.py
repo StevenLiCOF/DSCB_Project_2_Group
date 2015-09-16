@@ -26,17 +26,11 @@ def get_movies(directory):
         filepath = os.path.join(directory, filename)
         with open(filepath, 'r') as movie_file:
             movie_data = json.load(movie_file)
-        movie_list.append(movie_data)
+        if type(movie_data)=='dict':
+            movie_list.append(movie_data)
     print "Parsed %i movies from %i files" % (len(movie_list),
                                               len(file_contents))
     return movie_list
-
-def convert_date(field):
-    year=int(field[:4])
-    month=int(field[5:7])
-    day=int(field[8:10])
-    formatteddate=datetime.date(year,month,day)
-    return formatteddate
 
 def load_and_merge_movies():
     mojomovies=get_movies(MOJO_DIR)
