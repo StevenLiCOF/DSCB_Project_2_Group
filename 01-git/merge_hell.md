@@ -13,7 +13,7 @@ This means that some files on the remote you're pulling from changed in some way
 - If you just want to overwrite your local copy with whatever you're pulling, run `git checkout --theirs <file path goes here>`. There's also an `--ours` option if you want to overwrite the version on remote.
 - You can cancel the merge so you can save your own copy of your file. Do this with `git merge --abort`. When you've saved a copy, committed it, and are ready to resume merging, do so with `git merge <remote>/<branch>`. Note that you'll probably still be have to deal with a conflict, but this lets you save a copy first so you can `git checkout --theirs`
 
-Once you're done, whatever strategy you pick. you must commit the merge using `git commit`.
+Once you're done, whatever strategy you pick, you must commit the merged files using `git add` and `git commit`.
 
 # I did an oopsie and want to return a file to the way it was on a certain commit
 
