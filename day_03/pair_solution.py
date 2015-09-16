@@ -19,3 +19,5 @@ print balanced('(()()))(()')
 
 print balanced('((asd)asg()45)saa)df(ah()')
 print balanced('a((e)ger(j)t()s(eg))er')
+
+'this (thing1) other text (thing2 (subthing))'
