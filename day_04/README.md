@@ -1,6 +1,6 @@
 # Schedule
 
-* 9:30 - Pair Programming
+* 9:30 - [Pair Programming](pair.md)
 * 10:15 - [Regression in Python](Python_Regression_categorical_vals_testtrain_split.ipynb): categorical variables, test/train splits, cross validation
 * 10:40 - Project work 
 * 12:00 - Lunch
