@@ -12,6 +12,7 @@ A repo for the second pilot of data science training for Capital One
 - [Quick git manual](day_01/quick_git_manual.md)
 - [Git slides](day_01/git_slides.pdf)
 - [Git challenges](day_01/git_challenges.md)
+- [How to fix merging problems](day_02/merge_hell.md)
 
 ### Data Handling and Linear Regression with Python
 
@@ -26,3 +27,9 @@ A repo for the second pilot of data science training for Capital One
 ### Model Evaluation and Selection
 - [Evaluation Metrics slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Train/Test Splits, Cross Validation and Regularization slides](day_03/evaluation_and_model_selection_slides.pdf)
+- [Dealing with categorical features, train/test splits & cross validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
+
+### Project 1
+ - [Project Description and Goals](day_03/project_description.md)
+
+
