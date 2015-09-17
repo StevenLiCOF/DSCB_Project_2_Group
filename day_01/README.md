@@ -8,7 +8,9 @@
 
 - **12:00**  Lunch! And outside world catch-up time.
 
-- **1:30** Version Control with Git + GitHub, [slides](https://github.com/thisismetis/capitalone-pilottwo/blob/master/01-git/git_slides.pdf) and [handout](https://github.com/thisismetis/capitalone-pilottwo/blob/master/01-git/README.md).
+- **1:30** Version Control with Git + GitHub,
+  [slides](git_slides.pdf)
+  and [quick git manual](quick_git_manual.md).
 
 - **2:30** Time for [git challenges](git_challenge.md).
 
