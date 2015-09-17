@@ -24,5 +24,5 @@ A repo for the second pilot of data science training for Capital One
 - [Visualization CHallenges](day_02/dataviz_challenges.md)
 
 ### Model Evaluation and Selection
-- [Evaluation Metrics slides](day_03/evaluation_and_model_selection_slides.pdf) lecture
+- [Evaluation Metrics slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Train/Test Splits, Cross Validation and Regularization slides](day_03/evaluation_and_model_selection_slides.pdf)
