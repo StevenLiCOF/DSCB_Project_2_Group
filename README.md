@@ -14,6 +14,11 @@ A repo for the second pilot of data science training for Capital One
 - [Git challenges](day_01/git_challenges.md)
 - [How to fix merging problems](day_02/merge_hell.md)
 
+### Pythonic Coding
+- [The Zen of Python: Pythonic Principles](day_02/pythonic_HO.md)
+- [Good Programming Practices](day_02/pythonic_coding_slides.md)
+- [Python Input/Output, Building Modules](project_1/loaddata.py)
+
 ### Data Handling and Linear Regression with Python
 
 - [Linear Regression slides](day_01/linear_regression_slides.pdf)
@@ -29,7 +34,12 @@ A repo for the second pilot of data science training for Capital One
 - [Train/Test Splits, Cross Validation and Regularization slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Dealing with categorical features, train/test splits & cross validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
 
+### Data Visualization
+ - [_How to plot good_ slides](day_04/how_to_plot_good.pdf)
+ - [Plotting with seaborn in Python](day_04/Plotting.ipynb)
+
 ### Project 1
  - [Project Description and Goals](day_03/project_description.md)
+
 
 
