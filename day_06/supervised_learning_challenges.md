@@ -98,7 +98,7 @@ Calculate the accuracy, precision, recall and f1 scores on the test set for each
 Calculate the same metrics as in Challenge 9, but use cross validation instead of that test set.
 
 #### Challenge 11a `[Python]`
-A Portuguese bank is having a telemrketing campaign. They try to get their clients to subscribe to a term deposit product. Often more than one call to the same client is required. They have been recording their success or failure with each client, along with all the data they have on that client. To cut costs, the bank wants to predict who is likely to subscribe, so they can call those clients and not waste time and money calling people that likely won't subscribe anyway. To that end, [here are their records so far](bank.csv). You can learn more about each column [here](bank-description.md).
+A Portuguese bank is having a telemrketing campaign. They try to get their clients to subscribe to a term deposit product. Often more than one call to the same client is required. They have been recording their success or failure with each client, along with all the data they have on that client. To cut costs, the bank wants to predict who is likely to subscribe, so they can call those clients and not waste time and money calling people that likely won't subscribe anyway. To that end, [here are their records so far](https://github.com/thisismetis/capitalone-pilottwo/blob/master/project_2/data/bank/bank.csv). You can learn more about each column [here](https://github.com/thisismetis/capitalone-pilottwo/blob/master/project_2/data/bank/bank-description.md).
 
 Build a  classifier with all the numeric features. Calculate the accuracy, precision, and recall for identifying the subscribers.
 
