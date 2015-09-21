@@ -27,7 +27,7 @@ A repo for the second pilot of data science training for Capital One
 - [Exploratory Data Analysis and Regression with Python](day_02/EDA_and_Regression_full.ipynb)
 - [Python Challenges](day_02/python_challenges.md)
 - [Modeling Challenges](day_02/modeling_challenges.md)
-- [Visualization CHallenges](day_02/dataviz_challenges.md)
+- [Visualization Challenges](day_02/dataviz_challenges.md)
 
 ### Model Evaluation and Selection
 - [Evaluation Metrics slides](day_03/evaluation_and_model_selection_slides.pdf)
