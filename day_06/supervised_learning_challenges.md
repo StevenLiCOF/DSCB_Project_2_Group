@@ -180,7 +180,7 @@ The representative votes dataset
 only had 0s and 1s. Let's just swiftly tackle the breast cancer
 surgery data we talked about in class.
 
-Get it from [here](https://archive.ics.uci.edu/ml/datasets/Haberman%27s+Survival).
+The data is [in the repository](haberman.csv). You can learn more about it [here](https://archive.ics.uci.edu/ml/datasets/Haberman%27s+Survival).
 
 - What is the average and standard deviation of the age of all of the
 patients?
