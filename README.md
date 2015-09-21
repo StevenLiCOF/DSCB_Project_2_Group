@@ -4,7 +4,7 @@ A repo for the second pilot of data science training for Capital One
 ## Resources by topic
 
 ### Welcome to the course
-- [Introduction to the class](day_01/intro_to_class.pdf)
+- [Class Format and Philosophy](day_01/intro_to_class.pdf)
 - [Syllabus](Syllabus.md)
 - [Installation and Configuration](day_01/installed_checklist.md)
 
