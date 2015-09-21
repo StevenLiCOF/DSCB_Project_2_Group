@@ -34,6 +34,12 @@ A repo for the second pilot of data science training for Capital One
 - [Train/Test Splits, Cross Validation and Regularization slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Dealing with categorical features, train/test splits & cross validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
 
+### Classification with Python
+
+- [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
+- [Classification Error Metrics](classification_error_metrics_slides.pdf)
+- [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
+
 ### Data Visualization
  - [_How to plot good_ slides](day_04/how_to_plot_good.pdf)
  - [Plotting with seaborn in Python](day_04/Plotting.ipynb)
