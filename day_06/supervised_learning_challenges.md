@@ -199,6 +199,6 @@ affect the outcome how?
 
 
 #### Extra `[Modeling]` & `[Visualization]` Challenge E
-For each representatives classifier (KNN, logit, trivials), draw the ROC curve and calculate the AUC.
+For each representatives classifier (KNN and logistic regression), draw the ROC curve and calculate the AUC.
 As a `[Visualitation]` track bonus, make the ROC curve look good, following good data visualization principles.
 
