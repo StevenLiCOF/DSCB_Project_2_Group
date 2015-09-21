@@ -156,9 +156,30 @@ print 'Recall Score (Republican target): %s' % recall_score(party_test,party_pre
 print 'F1 Score (Republican target): %s' % f1_score(party_test,party_predicted_knn, pos_label='republican', average='binary')
 
 #Challenge 10
+#Note: Should refactor code by defining a function that passes the model as an argument if I have time
 from sklearn.cross_validation import KFold
 kf = KFold(vote_data.shape[0], n_folds=5)
 i=0
+AllDemsAcc=[]
+AllDemsPrec=[]
+AllDemsRecl=[]
+AllDemsF1=[]
+
+AllRepsAcc=[]
+AllRepsPrec=[]
+AllRepsRecl=[]
+AllRepsF1=[]
+
+LogitAcc=[]
+LogitPrec=[]
+LogitRecl=[]
+LogitF1=[]
+
+KNNAcc=[]
+KNNPrec=[]
+KNNRecl=[]
+KNNF1=[]
+
 for train, test in kf:
     i+=1
     votes_train, votes_test, party_train, party_test = np.array(votes_all)[train], np.array(votes_all)[test], np.array(party_all)[train], np.array(party_all)[test]
@@ -170,28 +191,48 @@ for train, test in kf:
     party_predicted_logit=logit_model.predict(votes_test)
     party_predicted_alldems=all_dems(votes_test)
     party_predicted_allreps=all_reps(votes_test)
-    print 'FOLD %s:' % i
-    print 'All Democrats Model'
-    print 'Accuracy Score: %s' % accuracy_score(party_test,party_predicted_alldems)
-    print 'Precision Score (Republican target): %s' % precision_score(party_test,party_predicted_alldems, pos_label='republican', average='binary')
-    print 'Recall Score (Republican target): %s' % recall_score(party_test,party_predicted_alldems, pos_label='republican', average='binary')
-    print 'F1 Score (Republican target): %s' % f1_score(party_test,party_predicted_alldems, pos_label='republican', average='binary')
-    print ''
-    print 'All Republicans Model'
-    print 'Accuracy Score: %s' % accuracy_score(party_test,party_predicted_allreps)
-    print 'Precision Score (Republican target): %s' % precision_score(party_test,party_predicted_allreps, pos_label='republican', average='binary')
-    print 'Recall Score (Republican target): %s' % recall_score(party_test,party_predicted_allreps, pos_label='republican', average='binary')
-    print 'F1 Score (Republican target): %s' % f1_score(party_test,party_predicted_allreps, pos_label='republican', average='binary')
-    print ''
-    print 'Logistic Regression Model'
-    print 'Accuracy Score: %s' % accuracy_score(party_test,party_predicted_logit)
-    print 'Precision Score (Republican target): %s' % precision_score(party_test,party_predicted_logit, pos_label='republican', average='binary')
-    print 'Recall Score (Republican target): %s' % recall_score(party_test,party_predicted_logit, pos_label='republican', average='binary')
-    print 'F1 Score (Republican target): %s' % f1_score(party_test,party_predicted_logit, pos_label='republican', average='binary')
-    print ''
-    print 'K Nearest Neighbors Model'
-    print 'Accuracy Score: %s' % accuracy_score(party_test,party_predicted_knn)
-    print 'Precision Score (Republican target): %s' % precision_score(party_test,party_predicted_knn, pos_label='republican', average='binary')
-    print 'Recall Score (Republican target): %s' % recall_score(party_test,party_predicted_knn, pos_label='republican', average='binary')
-    print 'F1 Score (Republican target): %s' % f1_score(party_test,party_predicted_knn, pos_label='republican', average='binary')
-    print ''
+    
+    AllDemsAcc.append(accuracy_score(party_test,party_predicted_alldems))
+    AllDemsPrec.append(precision_score(party_test,party_predicted_alldems, pos_label='republican', average='binary'))
+    AllDemsRecl.append(recall_score(party_test,party_predicted_alldems, pos_label='republican', average='binary'))
+    AllDemsF1.append(f1_score(party_test,party_predicted_alldems, pos_label='republican', average='binary'))
+    
+    AllRepsAcc.append(accuracy_score(party_test,party_predicted_allreps))
+    AllRepsPrec.append(precision_score(party_test,party_predicted_allreps, pos_label='republican', average='binary'))
+    AllRepsRecl.append(recall_score(party_test,party_predicted_allreps, pos_label='republican', average='binary'))
+    AllRepsF1.append(f1_score(party_test,party_predicted_allreps, pos_label='republican', average='binary'))    
+
+    LogitAcc.append(accuracy_score(party_test,party_predicted_logit))
+    LogitPrec.append(precision_score(party_test,party_predicted_logit, pos_label='republican', average='binary'))
+    LogitRecl.append(recall_score(party_test,party_predicted_logit, pos_label='republican', average='binary'))
+    LogitF1.append(f1_score(party_test,party_predicted_logit, pos_label='republican', average='binary'))
+
+    KNNAcc.append(accuracy_score(party_test,party_predicted_knn))
+    KNNPrec.append(precision_score(party_test,party_predicted_knn, pos_label='republican', average='binary'))
+    KNNRecl.append(recall_score(party_test,party_predicted_knn, pos_label='republican', average='binary'))
+    KNNF1.append(f1_score(party_test,party_predicted_knn, pos_label='republican', average='binary'))    
+
+print 'All Democrats Model'
+print 'Average Accuracy Score: %s' % np.array(AllDemsAcc).mean()
+print 'Average Precision Score (Republican target): %s' % np.array(AllDemsPrec).mean()
+print 'Average Recall Score (Republican target): %s' % np.array(AllDemsRecl).mean()
+print 'Average F1 Score (Republican target): %s' % np.array(AllDemsF1).mean()
+print ''
+print 'All Republicans Model'
+print 'Average Accuracy Score: %s' % np.array(AllRepsAcc).mean()
+print 'Average Precision Score (Republican target): %s' % np.array(AllRepsPrec).mean()
+print 'Average Recall Score (Republican target): %s' % np.array(AllRepsRecl).mean()
+print 'Average F1 Score (Republican target): %s' % np.array(AllRepsF1).mean()
+print ''
+print 'Logistic Regression Model'
+print 'Average Accuracy Score: %s' % np.array(LogitAcc).mean()
+print 'Average Precision Score (Republican target): %s' % np.array(LogitPrec).mean()
+print 'Average Recall Score (Republican target): %s' % np.array(LogitRecl).mean()
+print 'Average F1 Score (Republican target): %s' % np.array(LogitF1).mean()
+print ''
+print 'K Nearest Neighbors Model'
+print 'Average Accuracy Score: %s' % np.array(KNNAcc).mean()
+print 'Average Precision Score (Republican target): %s' % np.array(KNNPrec).mean()
+print 'Average Recall Score (Republican target): %s' % np.array(KNNRecl).mean()
+print 'Average F1 Score (Republican target): %s' % np.array(KNNF1).mean()
+print ''
