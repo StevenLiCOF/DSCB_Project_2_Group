@@ -1,54 +1,133 @@
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cross_validation import cross_val_score
+from sklearn.cross_validation import KFold
 from sklearn import metrics
+import re
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import numpy as np
 
 # constants
+
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_DIR = os.path.abspath(os.path.join(CURRENT_DIR, 'data'))
+DATA_DIR = os.path.abspath(os.path.join('data'))
 HOSPITAL_DIR = os.path.join(DATA_DIR, 'heart_disease')
+#HOSPITAL_DIR='C:\Users\SKH469\capitalone-pilottwo\project_2\data\heart_disease'
 
-with open(os.path.join(HOSPITAL_DIR, 'processed.cleveland.data')) as infile:
-    hospital_data = pd.read_csv(infile, header=None, na_values=['?'])
+hospital_data=pd.DataFrame()
+file_contents = os.listdir(HOSPITAL_DIR)
+for filename in file_contents:
+    filepath = os.path.join(HOSPITAL_DIR, filename)
+    if filepath.endswith('.data'):
+        with open(filepath, 'r') as infile:
+            hospital_data=hospital_data.append(pd.read_csv(infile, header=None, na_values=['?'], sep=r"[\s,]"))
 
 hospital_data = hospital_data.dropna()
 X = hospital_data.iloc[:,:13]
 Y = hospital_data.iloc[:,13]
 
-acc = []
-pre = []
-rec = []
-f1 = []
+def k_value_test(X,Y,krange,metriclist,numfolds):
+    '''
+    Solution to first few challenges. Creates a function and pulls most things the different types of metrics
+    and the paramter values into loops
+    X: n-by-p dataframe of features
+    Y: n-by-1 dataframe of target
+    krange: List of values of the k parameter for KNN
+    metriclist: List of performance metrics. Each element of the list must be valid scoring parameter values.
+    numfolds: Number of folds in the cross-validation
+    '''
+    results_df=pd.DataFrame()
+    "====== K-value testing report ======"
+    for metric in metriclist:
+        resultslist= []
+        for k in krange:
+            x = KNeighborsClassifier(k)
+            results = cross_val_score(x, X, Y, cv=numfolds, scoring=metric)
+            resultslist.append((k, results.mean()))
+        top_metric = sorted(resultslist, key=lambda p: p[1], reverse=True)
+        print "Best K for %s: %i (%f)" % (metric,top_metric[0][0], top_metric[0][1])
+        if results_df.shape == (0,0):
+            results_df = pd.DataFrame(resultslist, columns=['k',str(metric)])
+        else:
+            results_df=results_df.merge(pd.DataFrame(resultslist, columns=['k',str(metric)]),on='k')
+        #print pd.concat([results_df, pd.DataFrame(resultslist, columns=['k',str(metric)])])
+        #print results_df
+    results_df.plot(x='k')
+    plt.show()
+    print results_df
 
-for k in range(1,10):
-    x = KNeighborsClassifier(k)
-    results_1 = cross_val_score(x, X, Y, cv=10)
-    results_2 = cross_val_score(x, X, Y, cv=10, scoring='precision_macro')
-    results_3 = cross_val_score(x, X, Y, cv=10, scoring='recall_macro')
-    results_4 = cross_val_score(x, X, Y, cv=10, scoring='f1_macro')
-    acc.append((k, results_1.mean()))
-    pre.append((k, results_2.mean()))
-    rec.append((k, results_3.mean()))
-    f1.append((k, results_4.mean()))
+k_value_test(X,Y,range(1,11),['f1_weighted','accuracy','precision_weighted','recall_weighted',None])
 
-top_acc = sorted(acc, key=lambda p: p[1], reverse=True)
-top_pre = sorted(pre, key=lambda p: p[1], reverse=True)
-top_rec = sorted(rec, key=lambda p: p[1], reverse=True)
-top_f1 = sorted(f1, key=lambda p: p[1], reverse=True)
+def k_value_test2(X,Y,krange,metriclist,numfolds):
+    '''
+    This function attempts to optimize runtime by only fitting the model once per fold for each parameter level.
+    X: n-by-p dataframe of features
+    Y: n-by-1 dataframe of target
+    krange: List of values of the k parameter for KNN
+    metriclist: List of performance metrics. Each element of the list must be score function taking y_true and y_pred as arguments.
+    numfolds: number of cross-validation folds    
+    '''
+    results_df=pd.DataFrame()
+    "====== K-value testing report ======"
+    for k in krange:
+        metric_folds=[]
+        for train, test in KFold(Y.shape[0],numfolds):
+            X_train, Y_train, X_test, Y_test = np.array(X)[train], np.array(Y)[train], np.array(X)[test], np.array(Y)[test]
+            model = KNeighborsClassifier(k)
+            model.fit(X_train, Y_train)
+            Y_predicted=model.predict(X_test)
+            fold_row=[]
+            for metric in metriclist:
+                fold_row.append(metric(Y_test,Y_predicted))
+            metric_folds.append(fold_row)
+        results_df=results_df.append(pd.DataFrame.transpose(pd.DataFrame(pd.DataFrame(metric_folds).mean(axis=0))))
+    results_df['k']=pd.Series(krange,index=results_df.index)
+    results_df.columns=[metric.__name__ for metric in metriclist]+['k']
+    results_df.plot(x='k')
+    plt.show()
+    
+    metricnames=results_df.idxmax(axis=0).index
+    optparams = [paramrange[x] for x in results_df.idxmax(axis=0)]
+    for i in range(len(metricnames)-1):
+        print "Best K for %s: %i (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmax(axis=0)[i]])
+    
+k_value_test2(X,Y,range(1,11),[metrics.f1_score, metrics.recall_score, metrics.precision_score, metrics.accuracy_score],4)
 
-print "====== K-value testing report ======"
-print "Best K for accuracy: %i (%f)" % top_acc[0]
-print "Best K for precision: %i (%f)" % top_pre[0]
-print "Best K for recall: %i (%f)" % top_rec[0]
-print "Best K for f1: %i (%f)" % top_f1[0]
-
-acc_df = pd.DataFrame(acc, columns=['k',"acc"])
-pre_df = pd.DataFrame(pre, columns=['k',"pre"])
-rec_df = pd.DataFrame(rec, columns=['k',"rec"])
-f1_df = pd.DataFrame(f1, columns=['k',"f1"])
-results = acc_df.merge(pre_df,on="k").merge(rec_df,on="k").merge(f1_df,on="k")
-results.plot(x='k')
-plt.show()
+def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
+    '''
+    This is the final function that does everything in the challenge.
+    modeltype: Type of model (e.g. KNN), which takes a single parameter argument
+    X: n-by-p dataframe of features
+    Y: n-by-1 dataframe of target
+    paramrange: List of values of the parameter
+    metriclist: List of performance metrics. Each element of the list must be score function taking y_true and y_pred as arguments.
+    numfolds: number of cross-validation folds
+    '''
+    results_df=pd.DataFrame()
+    "====== K-value testing report ======"
+    for k in paramrange:
+        metric_folds=[]
+        for train, test in KFold(Y.shape[0],numfolds):
+            X_train, Y_train, X_test, Y_test = np.array(X)[train], np.array(Y)[train], np.array(X)[test], np.array(Y)[test]
+            model = KNeighborsClassifier(k)
+            model.fit(X_train, Y_train)
+            Y_predicted=model.predict(X_test)
+            fold_row=[]
+            for metric in metriclist:
+                fold_row.append(metric(Y_test,Y_predicted))
+            metric_folds.append(fold_row)
+        results_df=results_df.append(pd.DataFrame.transpose(pd.DataFrame(pd.DataFrame(metric_folds).mean(axis=0))), ignore_index=True)
+    results_df['k']=pd.Series(paramrange,index=results_df.index)
+    results_df.columns=[metric.__name__ for metric in metriclist]+['k']
+    results_df.plot(x='k')
+    plt.show()
+    
+    metricnames=results_df.idxmax(axis=0).index
+    optparams = [paramrange[x] for x in results_df.idxmax(axis=0)]
+    for i in range(len(metricnames)-1):
+        print "Best K for %s: %i (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmax(axis=0)[i]])
+    
+k_value_test3(KNeighborsClassifier,X,Y,range(1,11),[metrics.f1_score, metrics.recall_score, metrics.precision_score, metrics.accuracy_score],4)
