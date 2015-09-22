@@ -9,5 +9,6 @@ Then move it into a function called `k_value_test` that can take any arbitrary s
 * Add another keyword argument that takes a list of metric names to be displayed in the report/plot.
 * Make sure your functions have docstrings describing  their arguments and functionality.
 * The function as written calls `cross_val_score` 4 separate times to get the 4 different error measures; this re-trains and runs the model 4 times. You can speed up your function by only cross-validating once; look into `cross_val_predict`, the KFold iterator, and the `sklearn.metrics` functions.
+* Other algorithms have values like K we might want to experiment with. See if you can generalize the function even further, to work with any given algorithm and parameter.
 
 Once you're happy with your function, try combining all the hospital datasets and running it on the combined data.
