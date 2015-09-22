@@ -4,15 +4,15 @@ A repo for the second pilot of data science training for Capital One
 ## Resources by topic
 
 ### Welcome to the course
-- [Class Format and Philosophy](day_01/intro_to_class.pdf)
 - [Syllabus](Syllabus.md)
+- [Class Format and Philosophy](day_01/intro_to_class.pdf)
 - [Installation and Configuration](day_01/installed_checklist.md)
 
 ### Version Control and Git
-- [Quick git Manual](day_01/quick_git_manual.md)
+- [Quick Git Manual](day_01/quick_git_manual.md)
 - [Git Slides](day_01/git_slides.pdf)
 - [Git Challenges](day_01/git_challenges.md)
-- [How to fix merging problems](day_02/merge_hell.md)
+- [How to Fix Merging Problems](day_02/merge_hell.md)
 
 ### Pythonic Coding
 - [The Zen of Python: Pythonic Principles](day_02/pythonic_HO.md)
@@ -42,7 +42,7 @@ A repo for the second pilot of data science training for Capital One
 
 ### Data Visualization
  - [_How to Plot Good_ Slides](day_04/how_to_plot_good.pdf)
- - [Plotting with seaborn in Python](day_04/Plotting.ipynb)
+ - [Plotting with Seaborn in Python](day_04/Plotting.ipynb)
 
 ### Project 1
  - [Project Description and Goals](day_03/project_description.md)
