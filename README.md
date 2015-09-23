@@ -41,6 +41,7 @@ A repo for the second pilot of data science training for Capital One
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
 - [Solutions to Supervised Learning Challenges](day_08/supervised_learning_challenge_solutions.ipynb)
+- [Algorithm Bonanza: A Survey of Other Classification Algorithms](day_08/algorithms_galore_slides.pdf)
 
 ### Data Visualization
 - [_How to Plot Good_](day_04/how_to_plot_good.pdf)
