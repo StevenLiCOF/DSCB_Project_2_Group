@@ -30,8 +30,8 @@ Here are some examples for you to test your code on:
 
 `caesar_encrypt("HELLO", 4)` should return `LIPPS`.
 
-`caesar_encrypt("A shift of zero is nothing", 0)` should return `A
-shift of zero`.
+`caesar_encrypt("A shift of zero is nothing.", 0)` should return `A
+shift of zero is nothing.`.
 
 `caesar_encrypt("Backwards will also work. Like this!", -2)` should
 return `Zyaiuypbq ugjj yjqm umpi. Jgic rfgq!`.
