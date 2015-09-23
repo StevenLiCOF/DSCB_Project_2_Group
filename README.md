@@ -48,5 +48,7 @@ A repo for the second pilot of data science training for Capital One
 ### Project 1
 - [Project Description and Goals](day_03/project_description.md)
 
+### Project 2
+- [All Possible Project Descriptions](project_2/README.md)
 
 
