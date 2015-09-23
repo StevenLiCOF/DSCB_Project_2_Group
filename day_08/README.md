@@ -10,4 +10,6 @@
 
 1:00 pm - Project 2 Team Work Time
 
+3:00 pm - Algorithm Bonanza: A Survey of Other Classification Algorithms
+
 4:30 pm - Fade to Black
