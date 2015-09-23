@@ -11,7 +11,7 @@ loops over. For example, with a shift of 3, Y becomes B, since we jump
 back to a after z.
 
 Write a function `caesar_encrypt(message, num)`, which takes a string
-(`message`) to encrypt, and the `num` parameter as the shifting
+`message` to encrypt, and the `num` parameter as the shifting
 number. It should return the encrypted message.
 
 Ideally, punctuation, spaces, and capitalization should stay the same,
