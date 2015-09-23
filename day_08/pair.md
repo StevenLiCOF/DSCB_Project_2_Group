@@ -40,7 +40,7 @@ return `Zyaiuypbq ugjj yjqm umpi. Jgic rfgq!`.
 
 ----------------
 And finally, if you have a working function, you should be able to use
-it to quickly decypher this message written by Caesar himself, using a
+it to quickly decipher this message written by Caesar himself, using a
 17-shift:
 
 ```
