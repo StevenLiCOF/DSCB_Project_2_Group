@@ -18,9 +18,10 @@ A repo for the second pilot of data science training for Capital One
 - [The Zen of Python: Pythonic Principles](day_02/pythonic_HO.md)
 - [Good Programming Practices](day_02/pythonic_coding_slides.md)
 - [Python Input/Output, Building Modules](project_1/loaddata.py)
+- [Debugging in Python](day_07/debugging.pdf)
+- [Organizing Code, Logging, Unit Tests - Failing Helpfully](day_08/failing_helpfully.pdf)
 
 ### Data Handling and Linear Regression with Python
-
 - [Linear Regression Slides](day_01/linear_regression_slides.pdf)
 - [Introduction to Jupyter](day_02/Welcome_to_Jupyter.ipynb)
 - [Introduction to Pandas](day_02/Intro_to_Pandas_full.ipynb)
@@ -33,19 +34,19 @@ A repo for the second pilot of data science training for Capital One
 - [Evaluation Metrics Slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Train/Test Splits, Cross Validation and Regularization Slides](day_03/evaluation_and_model_selection_slides.pdf)
 - [Dealing with Categorical Features, Train/Test Splits & Cross Validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
+- [Feature Selection, Feature Extraction, Dimensionalty Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
 
 ### Classification with Python
-
 - [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
 
 ### Data Visualization
- - [_How to Plot Good_ Slides](day_04/how_to_plot_good.pdf)
- - [Plotting with Seaborn in Python](day_04/Plotting.ipynb)
+- [_How to Plot Good_ Slides](day_04/how_to_plot_good.pdf)
+- [Plotting with Seaborn in Python](day_04/Plotting.ipynb)
 
 ### Project 1
- - [Project Description and Goals](day_03/project_description.md)
+- [Project Description and Goals](day_03/project_description.md)
 
 
 
