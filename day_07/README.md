@@ -1,6 +1,6 @@
 9:30 am - *yep, it's another* [Pair Programming Challenge](pair.md)
 
-10:15 am - Debugging Python
+10:15 am - [Debugging in Python](debugging.pdf)
 
 11:00 am - Challenges
   - [Yesterday's challenges](../day_06/supervised_learning_challenges.md)
