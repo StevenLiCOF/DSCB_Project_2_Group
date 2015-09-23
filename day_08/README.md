@@ -2,9 +2,9 @@
 
 10:15 am - [Organizing Code, Logging, Unit Tests - Failing Helpfully](failing_helpfully.pdf)
 
-10:45 am - [Feature Selection, Feature Extraction, Dimensionality Reduction](feature_selection_extraction_dimensionality_reduction_slides.pdf)
+11:00 am - [Feature Selection, Feature Extraction, Dimensionality Reduction](feature_selection_extraction_dimensionality_reduction_slides.pdf)
   
-11:30 am - Finish Challenges
+11:45 am - Submit the Supervised Learning and Python Refactoring Challenges
   
 12:00 am - Fill the Fuel Tank 
 
