@@ -10,7 +10,7 @@
 
 1:00 pm - Project 2 Team Work Time
 
-3:00 pm - Algorithm Bonanza: A Survey of Other Classification Algorithms
+3:00 pm - [Algorithm Bonanza: A Survey of Other Classification Algorithms](algorithms_galore_slides.pdf)
 
 3:30 pm - Project Work Double Time Extra Effort
 
