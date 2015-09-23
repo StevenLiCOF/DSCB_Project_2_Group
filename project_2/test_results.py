@@ -23,7 +23,7 @@ def data_score(actual, predict):
         counter +=1
     score_false_0 = score1 / counter
     score_false_1 = score2 / counter
-    scores = [1-score_false_0, 1-score_false_1]
+    scores = [score_false_0, score_false_1, 1 - (score_false_0 + score_false_1)]
     print scores
     return scores
 
