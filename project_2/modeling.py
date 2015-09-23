@@ -90,7 +90,7 @@ def k_value_test2(X,Y,krange,metriclist,numfolds):
     plt.show()
     
     metricnames=results_df.idxmax(axis=0).index
-    optparams = [paramrange[x] for x in results_df.idxmax(axis=0)]
+    optparams = [krange[x] for x in results_df.idxmax(axis=0)]
     for i in range(len(metricnames)-1):
         print "Best K for %s: %i (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmax(axis=0)[i]])
     
