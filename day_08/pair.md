@@ -36,7 +36,7 @@ shift of zero is nothing.`.
 return `Zyaiuypbq ugjj yjqm umpi. Jgic rfgq!`.
 
 `caesar_encrypt("---====HeY====---", 55)` should return
-`---====MjD====---`.
+`---====KhB====---`.
 
 ----------------
 And finally, if you have a working function, you should be able to use
