@@ -16,9 +16,8 @@ number. It should return the encrypted message.
 
 Ideally, punctuation, spaces, and capitalization should stay the same,
 but your enemies are on to you and are in pursuit. You found the mole
-but you're surrounded. You have very little time left. So, any working
-implementation of this encryption that somehow gets the message across to your
-spy network will do in a pinch, don't worry about preserving
+but you're surrounded. You need to inform your spy network, but you have very little time left. So, any working
+implementation of this encryption that gets the message across will do in a pinch, don't worry about preserving
 capitalization, etc. If you find some more time before being captured,
 you can focus on that part.
 
