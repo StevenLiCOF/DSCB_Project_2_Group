@@ -40,6 +40,7 @@ A repo for the second pilot of data science training for Capital One
 - [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
+- [Solutions to Supervised Learning Challenges](day_08/supervised_learning_challenge_solutions.ipynb)
 
 ### Data Visualization
 - [_How to Plot Good_](day_04/how_to_plot_good.pdf)
@@ -51,4 +52,12 @@ A repo for the second pilot of data science training for Capital One
 ### Project 2
 - [All Possible Project Descriptions](project_2/README.md)
 
+### Pair Programming Challenges
+- [Fizz Buzz](day_02/pair.md)
+- [Check if Parentheses Match](day_03/pair.md)
+- [Calculating Varience and Covarience](day_04/pair.md)
+- [Project Euler: 13 Adjacent Digits with Max Product](day_06/pair.md)
+- [Cash Register iPad App for Change](day_07/pair.md)
+- [Caesar Cipher Encryption](day_08/pair.md)
+- 
 
