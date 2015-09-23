@@ -12,4 +12,6 @@
 
 3:00 pm - Algorithm Bonanza: A Survey of Other Classification Algorithms
 
+3:30 pm - Project Work Double Time Extra Effort
+
 4:30 pm - Fade to Black
