@@ -35,8 +35,8 @@ shift of zero is nothing.`.
 `caesar_encrypt("Backwards will also work. Like this!", -2)` should
 return `Zyaiuypbq ugjj yjqm umpi. Jgic rfgq!`.
 
-`caesar_encrypt("---====KhB====---", 55)` should return
-`---====MjD====---`.
+`caesar_encrypt("---====HeY====---", 55)` should return
+`---====KhB====---`.
 
 ----------------
 And finally, if you have a working function, you should be able to use
