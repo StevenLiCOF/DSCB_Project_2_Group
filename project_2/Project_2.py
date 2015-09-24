@@ -152,7 +152,7 @@ plt.title('Receiver operating characteristic example')
 plt.legend(loc="lower right")
 plt.show()
 
-metrics_summary=[]
+linear_metrics_summary=[]
 for threshold in np.arange(0,2,0.1):
     def custom_round(x):
         if x>threshold:
@@ -164,16 +164,16 @@ for threshold in np.arange(0,2,0.1):
            metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
            metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
            metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))]
-    metrics_summary.append([threshold,
+    linear_metrics_summary.append([threshold,
             metrics.accuracy_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
             metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
             metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
             metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))])
-metrics_summary=pd.DataFrame(metrics_summary)
-metrics_summary.columns=['threshold','accuracy','precision','recall','f1']
+linear_metrics_summary=pd.DataFrame(linear_metrics_summary)
+linear_metrics_summary.columns=['threshold','accuracy','precision','recall','f1']
 plt.figure()
-plt.plot(metrics_summary['threshold'],metrics_summary[['accuracy','precision','recall','f1']])
+plt.plot(linear_metrics_summary['threshold'],linear_metrics_summary[['accuracy','precision','recall','f1']])
 plt.xlabel('Heart Disease Threshold')
 plt.ylabel('Classification Metric')
-plt.legend(metrics_summary.columns[1:],loc='best')
+plt.legend(linear_metrics_summary.columns[1:],loc='best')
             

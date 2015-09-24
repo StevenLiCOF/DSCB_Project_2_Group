@@ -43,6 +43,31 @@ summaries_dict={}
 for item in files_dict.keys():
     summaries_dict[item]=files_dict[item].describe()
 
+#Age and cholesterol were selected out of the model.
+#Since this is unintuitive, we plot both against some other predictors to see if they are closely correlated.
+plt.scatter(cleveland_data['age'],cleveland_data['trestbps'])
+plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
+plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
+plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
+
+#Univariate views of cholesterol and age
+cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
+plt.figure() 
+ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+
+cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
+plt.figure() 
+ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+
+import seaborn
+with seaborn.axes_style('white'):
+    Y_test.boxplot(column='prediction',by='num')
+    seaborn.despine()
+    
 #del processed_data['ca']
 cleveland_data=files_dict['cleveland'].dropna()
 cleveland_data['treated_chol']=cleveland_data['chol'].apply(lambda x: max(x,190))
@@ -100,46 +125,26 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
     for i in range(len(metricnames)-1):
         print "Best K for %s: %f (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmin(axis=0)[i]])
     
-k_value_test3(linear_model.LogisticRegression,X,Y,np.arange(1.0,4.0,0.05),[mean_squared_error],4)
-
+k_value_test3(linear_model.LogisticRegression,X,Y,np.arange(0.15,0.2,0.001),[mean_squared_error],4)
+#2.64
+#0.19
 #Fit lasso model
 from sklearn.cross_validation import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
-lassomodel=linear_model.Lasso(alpha = 0.004, normalize=True)
+lassomodel=linear_model.LogisticRegression(penalty='l1', C = 0.19)
 lassomodel.fit(X_train, Y_train)
 Y_test=pd.DataFrame(Y_test)
-Y_test['prediction']=lassomodel.predict(X_test)
-Y_test['num_capped']=Y_test['num'].replace([2,3,4],[1,1,1])
+Y_test['prediction']=lassomodel.predict_proba(X_test)[:,1]
+
+#Y_test['num_capped']=Y_test['num'].replace([2,3,4],[1,1,1])
 #Print model coefficients
-pprint(zip(X.columns.values,lassomodel.coef_))
+pprint(zip(X.columns.values,lassomodel.coef_[0]))
 print mean_squared_error(Y_test['num'],Y_test['prediction'])
+
 #print lassomodel.intercept_
-#Age and cholesterol were selected out of the model.
-#Since this is unintuitive, we plot both against some other predictors to see if they are closely correlated.
-plt.scatter(cleveland_data['age'],cleveland_data['trestbps'])
-plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
-plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
-plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
 
-#Univariate views of cholesterol and age
-cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
-plt.figure() 
-ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
-for tick in ax.get_xticklabels():
-        tick.set_rotation(45)
-
-cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
-plt.figure() 
-ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
-for tick in ax.get_xticklabels():
-        tick.set_rotation(45)
-
-import seaborn
-with seaborn.axes_style('white'):
-    Y_test.boxplot(column='prediction',by='num')
-    seaborn.despine()
 # Compute ROC curve and ROC area for each class
-fpr, tpr, _ = metrics.roc_curve(Y_test['num_capped'], Y_test['prediction'])
+fpr, tpr, _ = metrics.roc_curve(Y_test['num'], Y_test['prediction'])
 roc_auc = metrics.auc(fpr, tpr)
 # Plot of a ROC curve for a specific class
 plt.figure()
@@ -153,28 +158,28 @@ plt.title('Receiver operating characteristic example')
 plt.legend(loc="lower right")
 plt.show()
 
-metrics_summary=[]
-for threshold in np.arange(0,2,0.1):
+logistic_metrics_summary=[]
+for threshold in np.arange(0,1,0.05):
     def custom_round(x):
         if x>threshold:
             return 1
         else:
             return 0
     print [threshold,
-           metrics.accuracy_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-           metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-           metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-           metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))]
-    metrics_summary.append([threshold,
-            metrics.accuracy_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-            metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-            metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
-            metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))])
-metrics_summary=pd.DataFrame(metrics_summary)
-metrics_summary.columns=['threshold','accuracy','precision','recall','f1']
+           metrics.accuracy_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+           metrics.precision_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+           metrics.recall_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+           metrics.f1_score(Y_test['num'],map(custom_round,Y_test['prediction']))]
+    logistic_metrics_summary.append([threshold,
+            metrics.accuracy_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+            metrics.precision_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+            metrics.recall_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+            metrics.f1_score(Y_test['num'],map(custom_round,Y_test['prediction']))])
+logistic_metrics_summary=pd.DataFrame(logistic_metrics_summary)
+logistic_metrics_summary.columns=['threshold','accuracy','precision','recall','f1']
 plt.figure()
-plt.plot(metrics_summary['threshold'],metrics_summary[['accuracy','precision','recall','f1']])
+plt.plot(logistic_metrics_summary['threshold'],logistic_metrics_summary[['accuracy','precision','recall','f1']])
 plt.xlabel('Heart Disease Threshold')
 plt.ylabel('Classification Metric')
-plt.legend(metrics_summary.columns[1:],loc='best')
+plt.legend(logistic_metrics_summary.columns[1:],loc='best')
             
