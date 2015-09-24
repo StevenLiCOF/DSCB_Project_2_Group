@@ -18,7 +18,7 @@ print is_valid_anagram("A decimal point", "I'm a dot in place")    # True
 print is_valid_anagram("The Morse Code", "Here come dots...")      # True 
 print is_valid_anagram("Election Results", "Lies. Let's recount.") # True 
 print is_valid_anagram("Astronomer", "Moon Starer")                # True 
-print is_valid_anagram("Snooze alarms", "Alas no more Z's")        # True 
+print is_valid_anagram("Snooze alarms", "Alas, no more Z's")        # True 
 print is_valid_anagram("Brian", "Brain")                           # True 
 print is_valid_anagram("Irmak", "Brad Pitt")                       # False
 ```
