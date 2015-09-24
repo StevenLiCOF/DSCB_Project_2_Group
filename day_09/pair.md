@@ -26,6 +26,7 @@ print is_valid_anagram("Irmak", "Brad Pitt")                       # False
 ------
 
 Bonus if you have time:
+
 Implement the _guessing game_. Computer picks a number between 1
 and 100. Asks you to guess it. You enter a guess, it will tell you if
 your guess is too high or too low. If you guess cirrectly within 6
@@ -61,5 +62,5 @@ number and the computer is trying to guess it in 6 tries. It will tell
 you its guess and you will input if it's too high or low. No
 cheating. Also try to implement a strategy that does not have a
 blatant weakness (meaning you shouldn't be able to beat it every time
-by picking a specific number)
+by picking a specific number).
 
