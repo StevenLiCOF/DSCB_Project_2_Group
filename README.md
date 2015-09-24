@@ -20,6 +20,7 @@ A repo for the second pilot of data science training for Capital One
 - [Python Input/Output, Building Modules](project_1/loaddata.py)
 - [Debugging in Python](day_07/debugging.pdf)
 - [Organizing Code, Logging, Unit Tests - Failing Helpfully](day_08/failing_helpfully.pdf)
+- [Iterators, Generators, Classes](day_09/generators_and_classes.pdf)
 
 ### Data Handling and Linear Regression with Python
 - [Linear Regression](day_01/linear_regression_slides.pdf)
