@@ -42,31 +42,6 @@ for item in files_dict.keys():
 summaries_dict={}
 for item in files_dict.keys():
     summaries_dict[item]=files_dict[item].describe()
-
-#Age and cholesterol were selected out of the model.
-#Since this is unintuitive, we plot both against some other predictors to see if they are closely correlated.
-plt.scatter(cleveland_data['age'],cleveland_data['trestbps'])
-plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
-plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
-plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
-
-#Univariate views of cholesterol and age
-cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
-plt.figure() 
-ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
-for tick in ax.get_xticklabels():
-        tick.set_rotation(45)
-
-cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
-plt.figure() 
-ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
-for tick in ax.get_xticklabels():
-        tick.set_rotation(45)
-
-import seaborn
-with seaborn.axes_style('white'):
-    Y_test.boxplot(column='prediction',by='num')
-    seaborn.despine()
     
 #del processed_data['ca']
 cleveland_data=files_dict['cleveland'].dropna()
@@ -82,12 +57,43 @@ Y=Y.replace([2,3,4],[1,1,1])
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
 
-#Univariate views of input to check for relationship with target
-num_avg_groupby_list = ['cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
-for var in num_avg_groupby_list: 
-    plt.figure() 
-    cleveland_data[['num',var]].sort(var).groupby([var])['num'].mean().plot()
+from sklearn.feature_selection import chi2
+chi2, pval=chi2(X,Y)
+variable_importance=pd.DataFrame(zip(features,chi2,pval))
+variable_importance.columns=['feature','chi2','pvalue']
+print variable_importance
 
+#Univariate views of input to check for relationship with target
+#num_avg_groupby_list = ['cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
+#for var in num_avg_groupby_list: 
+#    plt.figure() 
+#    cleveland_data[['num',var]].sort(var).groupby([var])['num'].mean().plot()
+#
+##Age and cholesterol were selected out of the model.
+##Since this is unintuitive, we plot both against some other predictors to see if they are closely correlated.
+#plt.scatter(cleveland_data['age'],cleveland_data['trestbps'])
+#plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
+#plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
+#plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
+#
+##Univariate views of cholesterol and age
+#cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
+#plt.figure() 
+#ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
+#for tick in ax.get_xticklabels():
+#        tick.set_rotation(45)
+#
+#cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
+#plt.figure() 
+#ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
+#for tick in ax.get_xticklabels():
+#        tick.set_rotation(45)
+
+import seaborn
+#with seaborn.axes_style('white'):
+#    Y_test.boxplot(column='prediction',by='num')
+#    seaborn.despine()
+    
 #Calibrating lasso parameter
 from pprint import pprint
 def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
@@ -123,14 +129,14 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
     metricnames=results_df.idxmin(axis=0).index
     optparams = [paramrange[x] for x in results_df.idxmin(axis=0)]
     for i in range(len(metricnames)-1):
-        print "Best K for %s: %f (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmin(axis=0)[i]])
+        print "Best C for %s: %f (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmin(axis=0)[i]])
     
 k_value_test3(linear_model.LogisticRegression,X,Y,np.arange(0.15,0.2,0.001),[mean_squared_error],4)
 #2.64
 #0.19
 #Fit lasso model
 from sklearn.cross_validation import train_test_split
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=11)
 lassomodel=linear_model.LogisticRegression(penalty='l1', C = 0.19)
 lassomodel.fit(X_train, Y_train)
 Y_test=pd.DataFrame(Y_test)
@@ -165,11 +171,11 @@ for threshold in np.arange(0,1,0.05):
             return 1
         else:
             return 0
-    print [threshold,
-           metrics.accuracy_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
-           metrics.precision_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
-           metrics.recall_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
-           metrics.f1_score(Y_test['num'],map(custom_round,Y_test['prediction']))]
+#    print [threshold,
+#           metrics.accuracy_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+#           metrics.precision_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+#           metrics.recall_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
+#           metrics.f1_score(Y_test['num'],map(custom_round,Y_test['prediction']))]
     logistic_metrics_summary.append([threshold,
             metrics.accuracy_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
             metrics.precision_score(Y_test['num'],map(custom_round,Y_test['prediction'])),
@@ -182,4 +188,3 @@ plt.plot(logistic_metrics_summary['threshold'],logistic_metrics_summary[['accura
 plt.xlabel('Heart Disease Threshold')
 plt.ylabel('Classification Metric')
 plt.legend(logistic_metrics_summary.columns[1:],loc='best')
-            
