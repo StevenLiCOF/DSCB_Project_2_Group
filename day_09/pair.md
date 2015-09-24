@@ -62,5 +62,5 @@ number and the computer is trying to guess it in 6 tries. It will tell
 you its guess and you will input if it's too high or low. No
 cheating! Also try to implement a strategy that does not have a
 blatant weakness (meaning you shouldn't be able to beat it every time
-by picking a specific number).
+by picking a specific number). Try to find the best strategy for the computer to win as much as possible.
 
