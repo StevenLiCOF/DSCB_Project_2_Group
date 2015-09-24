@@ -1,6 +1,6 @@
 9:30 am - [The Final Pair Programming Challenge](pair.md)
 
-10:15 am - Python Patterns: Generators and Classes
+10:15 am - Python Generators and Classes
 
 11:00 am - Project Work
   
