@@ -34,7 +34,8 @@ for filename in file_contents:
            
 processed_data=pd.DataFrame()
 for item in files_dict.keys():
-    files_dict[item].columns=['age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','slope','ca','thal','num']
+    files_dict[item].columns=['age','sex','cp','trestbps','chol','fbs','restecg','thalach',
+                            'exang','oldpeak','slope','ca','thal','num']
     files_dict[item]['location']=item
     processed_data=processed_data.append(files_dict[item])
 
@@ -42,15 +43,27 @@ summaries_dict={}
 for item in files_dict.keys():
     summaries_dict[item]=files_dict[item].describe()
 
-del processed_data['ca']
-
+#del processed_data['ca']
 cleveland_data=files_dict['cleveland'].dropna()
-X = cleveland_data.iloc[:,:13]
-Y = cleveland_data.iloc[:,13]
+cleveland_data['treated_chol']=cleveland_data['chol'].apply(lambda x: max(x,190))
+cleveland_data['low_chol_ind']=cleveland_data['chol'].apply(lambda x: x<190)
+
+features=['age', 'sex', 'cp', 'trestbps', 'fbs', 'restecg', 'thalach', 'exang',
+ 'oldpeak', 'slope', 'ca', 'thal', 'treated_chol', 'low_chol_ind']
+X = cleveland_data[features]
+Y = cleveland_data['num']
 
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
-import numpy as np
+
+#Univariate views of input to check for relationship with target
+num_avg_groupby_list = ['cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
+for var in num_avg_groupby_list: 
+    plt.figure() 
+    cleveland_data[['num',var]].sort(var).groupby([var])['num'].mean().plot()
+
+#Calibrating lasso parameter
+from pprint import pprint
 def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
     '''
     This is the final function that does everything in the challenge.
@@ -69,6 +82,7 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
             X_train, Y_train, X_test, Y_test = np.array(X)[train], np.array(Y)[train], np.array(X)[test], np.array(Y)[test]
             model = linear_model.Lasso(alpha = k, normalize=True)
             model.fit(X_train, Y_train)
+            pprint(zip(X.columns.values,model.coef_))
             Y_predicted=model.predict(X_test)
             fold_row=[]
             for metric in metriclist:
@@ -80,14 +94,81 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
     results_df.plot(x='k')
     plt.show()
     
-    metricnames=results_df.idxmax(axis=0).index
-    optparams = [paramrange[x] for x in results_df.idxmax(axis=0)]
+    metricnames=results_df.idxmin(axis=0).index
+    optparams = [paramrange[x] for x in results_df.idxmin(axis=0)]
     for i in range(len(metricnames)-1):
-        print "Best K for %s: %i (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmax(axis=0)[i]])
+        print "Best K for %s: %f (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmin(axis=0)[i]])
     
 k_value_test3(linear_model.Lasso,X,Y,np.arange(0,.01,0.001),[mean_squared_error],4)
 
+#Fit lasso model
+from sklearn.cross_validation import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+lassomodel=linear_model.Lasso(alpha = 0.004, normalize=True)
+lassomodel.fit(X_train, Y_train)
+Y_test=pd.DataFrame(Y_test)
+Y_test['prediction']=lassomodel.predict(X_test)
+Y_test['num_capped']=Y_test['num'].replace([2,3,4],[1,1,1])
+#Print model coefficients
+pprint(zip(X.columns.values,lassomodel.coef_))
+print mean_squared_error(Y_test['num'],Y_test['prediction'])
 
+#Age and cholesterol were selected out of the model.
+#Since this is unintuitive, we plot both against some other predictors to see if they are closely correlated.
+plt.scatter(cleveland_data['age'],cleveland_data['trestbps'])
+plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
+plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
+plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
+
+#Univariate views of cholesterol and age
+cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
+plt.figure() 
+ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+
+cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
+plt.figure() 
+ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+
+import seaborn
+with seaborn.axes_style('white'):
+    Y_test.boxplot(column='prediction',by='num')
+    seaborn.despine()
+# Compute ROC curve and ROC area for each class
+fpr, tpr, _ = metrics.roc_curve(Y_test['num_capped'], Y_test['prediction'])
+roc_auc = metrics.auc(fpr, tpr)
+# Plot of a ROC curve for a specific class
+plt.figure()
+plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], 'k--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+plt.show()
+
+metrics_summary=pd.DataFrame()
+for threshold in np.arange(0,2,0.1):
+    def custom_round(x):
+        if x>threshold:
+            return 1
+        else:
+            return 0
+    print [metrics.accuracy_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))]
+    metrics_summary.append([metrics.accuracy_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.precision_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.recall_score(Y_test['num_capped'],map(custom_round,Y_test['prediction'])),
+            metrics.f1_score(Y_test['num_capped'],map(custom_round,Y_test['prediction']))])
+            
+            
 #Thal is mostly normal for Cleveland, and mostly defect when not missing for other locations.
 #Thus we assume that missing thal means normal for other locations.
 #processed_data['thal']=processed_data['thal'].fillna(3)
