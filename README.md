@@ -60,4 +60,7 @@ A repo for the second pilot of data science training for Capital One
 - [Project Euler: 13 Adjacent Digits with Max Product](day_06/pair.md)
 - [Cash Register iPad App for Change](day_07/pair.md)
 - [Caesar Cipher Encryption](day_08/pair.md)
+- [Anagram Checker & Guessing Game Strategy](day_09/pair.md)
+
+
 
