@@ -52,6 +52,7 @@ features=['age', 'sex', 'cp', 'trestbps', 'fbs', 'restecg', 'thalach', 'exang',
  'oldpeak', 'slope', 'ca', 'thal', 'treated_chol', 'low_chol_ind']
 X = cleveland_data[features]
 Y = cleveland_data['num']
+Y=Y.replace([2,3,4],[1,1,1])
 
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
@@ -80,9 +81,9 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
         metric_folds=[]
         for train, test in KFold(Y.shape[0],numfolds):
             X_train, Y_train, X_test, Y_test = np.array(X)[train], np.array(Y)[train], np.array(X)[test], np.array(Y)[test]
-            model = linear_model.Lasso(alpha = k, normalize=True)
+            model = modeltype(penalty='l1', C = k)
             model.fit(X_train, Y_train)
-            pprint(zip(X.columns.values,model.coef_))
+            #pprint(zip(X.columns.values,model.coef_))
             Y_predicted=model.predict(X_test)
             fold_row=[]
             for metric in metriclist:
@@ -99,7 +100,7 @@ def k_value_test3(modeltype, X,Y,paramrange,metriclist,numfolds):
     for i in range(len(metricnames)-1):
         print "Best K for %s: %f (%f)" % (metricnames[i],optparams[i],results_df[metricnames[i]][results_df.idxmin(axis=0)[i]])
     
-k_value_test3(linear_model.Lasso,X,Y,np.arange(0,.01,0.001),[mean_squared_error],4)
+k_value_test3(linear_model.LogisticRegression,X,Y,np.arange(1.0,4.0,0.05),[mean_squared_error],4)
 
 #Fit lasso model
 from sklearn.cross_validation import train_test_split
