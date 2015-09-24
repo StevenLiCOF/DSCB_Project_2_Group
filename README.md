@@ -35,7 +35,7 @@ A repo for the second pilot of data science training for Capital One
 - [Train/Test Splits, Cross Validation and Regularization](day_03/model_select_2_traintest_regularization_slides.pdf)
 - [Dealing with Categorical Features, Train/Test Splits & Cross Validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
-- [Feature Selection, Feature Extraction, Dimensionalty Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
+- [Feature Selection, Feature Extraction, Dimensionality Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
 
 ### Classification with Python
 - [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
