@@ -29,7 +29,7 @@ Bonus if you have time:
 
 Implement the _guessing game_. Computer picks a number between 1
 and 100. Asks you to guess it. You enter a guess, it will tell you if
-your guess is too high or too low. If you guess cirrectly within 6
+your guess is too high or too low. If you guess correctly within 6
 tries, you win. If you exhaust your 6 guesses without getting the
 computer's pick, you lose.
 
@@ -60,7 +60,7 @@ Bonus if you still have more time:
 Implement the _guessing game_ again, but this time you are picking the
 number and the computer is trying to guess it in 6 tries. It will tell
 you its guess and you will input if it's too high or low. No
-cheating. Also try to implement a strategy that does not have a
+cheating! Also try to implement a strategy that does not have a
 blatant weakness (meaning you shouldn't be able to beat it every time
 by picking a specific number).
 
