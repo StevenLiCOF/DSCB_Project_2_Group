@@ -38,11 +38,14 @@ A repo for the second pilot of data science training for Capital One
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
 - [Feature Selection, Feature Extraction, Dimensionality Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
 
-### Classification with Python
+### Classification and Clustering with Python
 - [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
 - [Solutions to Supervised Learning Challenges](day_08/supervised_learning_challenge_solutions.ipynb)
 - [Algorithm Bonanza: A Survey of Other Classification Algorithms](day_08/algorithms_galore_slides.pdf)
+- [More on Supervised Learning Algorithms: Time Series, Decision Trees, Ensembles, Random Forests](day_10/time_series_decision_trees_random_forests.pdf)
+- [Even more on Supervised Learning Algorithms: Support Vector Machines, Kernel Trick](day_10/support_vector_machines.pdf)
+- [Unsupervised Learning: All Major Clustering Algorithms](day_10/unsupervised_learning_slides.pdf)
 
 ### Data Visualization
 - [_How to Plot Good_](day_04/how_to_plot_good.pdf)
