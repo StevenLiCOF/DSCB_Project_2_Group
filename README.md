@@ -47,6 +47,7 @@ A repo for the second pilot of data science training for Capital One
 - [More on Supervised Learning Algorithms: Time Series, Decision Trees, Random Forests](day_10/time_series_decision_trees_random_forests.pdf)
 - [Even more on Supervised Learning Algorithms: Support Vector Machines, Kernel Trick](day_10/support_vector_machines.pdf)
 - [Unsupervised Learning: All Major Clustering Algorithms](day_10/unsupervised_learning_slides.pdf)
+- [Dealing with BIGish data: Stochastic Gradient Descent](day_10/stochastic_gradient_descent.pdf)
 
 ### Data Visualization
 - [_How to Plot Good_](day_04/how_to_plot_good.pdf)
