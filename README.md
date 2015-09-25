@@ -44,7 +44,7 @@ A repo for the second pilot of data science training for Capital One
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
 - [Solutions to Supervised Learning Challenges](day_08/supervised_learning_challenge_solutions.ipynb)
 - [Algorithm Bonanza: A Survey of Other Classification Algorithms](day_08/algorithms_galore_slides.pdf)
-- [More on Supervised Learning Algorithms: Time Series, Decision Trees, Ensembles, Random Forests](day_10/time_series_decision_trees_random_forests.pdf)
+- [More on Supervised Learning Algorithms: Time Series, Decision Trees, Random Forests](day_10/time_series_decision_trees_random_forests.pdf)
 - [Even more on Supervised Learning Algorithms: Support Vector Machines, Kernel Trick](day_10/support_vector_machines.pdf)
 - [Unsupervised Learning: All Major Clustering Algorithms](day_10/unsupervised_learning_slides.pdf)
 
