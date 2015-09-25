@@ -203,7 +203,7 @@ print 'Naive Bayes (Gaussian) accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_
 from sklearn.svm import SVC
 model = SVC().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'SVM Classifier accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'SVM Classifier accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.recall_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.precision_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
@@ -214,14 +214,22 @@ print 'SVM Classifier accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
 from sklearn.tree import DecisionTreeClassifier
 model = DecisionTreeClassifier().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'Decision Tree accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'Decision Tree accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
+print 'Decision Tree accuracy: %.4f' % metrics.recall_score(Y_test, Y_test_pred)
+print 'Decision Tree accuracy: %.4f' % metrics.precision_score(Y_test, Y_test_pred)
+print 'Decision Tree accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
 
 ###============ Random Forest ===============
 
 from sklearn.ensemble import RandomForestClassifier
 model = RandomForestClassifier().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'Random Forest accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'Random Forest accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
+print 'Random Forest accuracy: %.4f' % metrics.recall_score(Y_test, Y_test_pred)
+print 'Random Forest accuracy: %.4f' % metrics.precision_score(Y_test, Y_test_pred)
+print 'Random Forest accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
+
+
 
 ###============ Model Comparision ==========
 from sklearn.cross_validation import cross_val_score
@@ -239,4 +247,65 @@ for algorithm in (LogisticRegression,
     names.append(algorithm.__name__)
     accs.append(accuracy)
     
+#from sklearn.cluster import KMeans
+#
+#features=['age', 'sex', 'cp', 'trestbps', 'fbs', 'restecg', 'thalach', 'exang',
+# 'oldpeak', 'slope', 'ca', 'thal', 'treated_chol','low_chol_ind']
+#X = cleveland_data[features]
+#Y = cleveland_data['num']
+#
+#cluster = KMeans(2).fit_predict(X)  
+#print cluster
     
+# Logistic Regression
+
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression().fit(X_train, Y_train)
+Y_test_pred = model.predict(X_test)
+logit_accuracy = accuracy_score(Y_test, Y_test_pred)
+print 'Logistic Regression accuracy: %.4f' % logit_accuracy    
+    
+## KNN 
+
+from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
+
+from sklearn.cross_validation import train_test_split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+
+accs = []
+f1 = []
+for n in range(1,20):
+    model = KNeighborsClassifier(n_neighbors=n).fit(X_train,Y_train)
+    Y_test_pred = model.predict(X_test)
+    accuracy = accuracy_score(Y_test, Y_test_pred)
+    f1score = metrics.f1_score(Y_test, Y_test_pred)
+    accs.append(accuracy)
+    f1.append(f1score)
+    print 'KNN (n=%i) accuracy: %.4f' % (n,accuracy)
+    print 'KNN (n=%i) F1 score: %.4f' % (n,f1score)
+    
+
+print 'KNN max accuracy: %.4f' % max(accs)
+plt.plot(range(1,20), accs)
+plt.xlabel('k neighbors')
+#plt.ylabel('Accuracy') 
+plt.plot(range(1,20), f1)
+plt.xlabel('k neighbors')
+#plt.ylabel('F1 score')  
+plt.legend(['Accuracy','F1 score'])  
+
+knn, = plt.plot(range(1,20), accs)
+logit, = plt.plot(range(1,20), [logit_accuracy]*19)
+#democ, = plt.plot(range(1,20), [democ_accuracy]*19)
+#repub, = plt.plot(range(1,20), [repub_accuracy]*19)
+plt.legend((logit,knn),
+           ("LogitReg","KNN"),
+           loc='best')
+plt.xlabel('k neighbors')
+plt.ylabel('Accuracy')
+
+savefig('C:\Users\IWJ377\Documents\BootCamp\capitalone-pilottwo\project_2\foo.png')
+
+        
