@@ -20,6 +20,7 @@ A repo for the second pilot of data science training for Capital One
 - [Python Input/Output, Building Modules](project_1/loaddata.py)
 - [Debugging in Python](day_07/debugging.pdf)
 - [Organizing Code, Logging, Unit Tests - Failing Helpfully](day_08/failing_helpfully.pdf)
+- [Iterators, Generators, Classes](day_09/generators_and_classes.pdf)
 
 ### Data Handling and Linear Regression with Python
 - [Linear Regression](day_01/linear_regression_slides.pdf)
@@ -35,13 +36,18 @@ A repo for the second pilot of data science training for Capital One
 - [Train/Test Splits, Cross Validation and Regularization](day_03/model_select_2_traintest_regularization_slides.pdf)
 - [Dealing with Categorical Features, Train/Test Splits & Cross Validation in Python](day_04/Python_Regression_categorical_vals_testtrain_split.ipynb)
 - [Classification Error Metrics](classification_error_metrics_slides.pdf)
-- [Feature Selection, Feature Extraction, Dimensionalty Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
+- [Feature Selection, Feature Extraction, Dimensionality Reduction](day_08/feature_selection_extraction_dimensionality_reduction_slides.pdf)
+- [Scikit-learn Algorithm Cheat Sheet](http://scikit-learn.org/stable/_static/ml_map.png)
 
-### Classification with Python
+### Classification and Clustering with Python
 - [Supervised Learning: Logistic Regression, KNN](day_06/supervised_learning__logisticR_KNN_slides.pdf)
 - [Supervised Learning Challenges](day_06/supervised_learning_challenges.md)
 - [Solutions to Supervised Learning Challenges](day_08/supervised_learning_challenge_solutions.ipynb)
 - [Algorithm Bonanza: A Survey of Other Classification Algorithms](day_08/algorithms_galore_slides.pdf)
+- [More on Supervised Learning Algorithms: Time Series, Decision Trees, Random Forests](day_10/time_series_decision_trees_random_forests.pdf)
+- [Even more on Supervised Learning Algorithms: Support Vector Machines, Kernel Trick](day_10/support_vector_machines.pdf)
+- [Unsupervised Learning: All Major Clustering Algorithms](day_10/unsupervised_learning_slides.pdf)
+- [Dealing with BIGish data: Stochastic Gradient Descent](day_10/stochastic_gradient_descent.pdf)
 
 ### Data Visualization
 - [_How to Plot Good_](day_04/how_to_plot_good.pdf)
@@ -60,4 +66,7 @@ A repo for the second pilot of data science training for Capital One
 - [Project Euler: 13 Adjacent Digits with Max Product](day_06/pair.md)
 - [Cash Register iPad App for Change](day_07/pair.md)
 - [Caesar Cipher Encryption](day_08/pair.md)
+- [Anagram Checker & Guessing Game Strategy](day_09/pair.md)
+
+
 
