@@ -74,24 +74,25 @@ print variable_importance
 #plt.scatter(cleveland_data['chol'],cleveland_data['trestbps'])
 #plt.scatter(cleveland_data['age'],cleveland_data['thalach'])
 #plt.scatter(cleveland_data['chol'],cleveland_data['thalach'])
-#
-##Univariate views of cholesterol and age
-#cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
-#plt.figure() 
-#ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
-#for tick in ax.get_xticklabels():
-#        tick.set_rotation(45)
-#
-#cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
-#plt.figure() 
-#ax=cleveland_data[['num','cholbin']].sort('cholbin').groupby(['cholbin'])['num'].mean().plot()
-#for tick in ax.get_xticklabels():
-#        tick.set_rotation(45)
-#
-#import seaborn
-#with seaborn.axes_style('white'):
-#    Y_test.boxplot(column='prediction',by='num')
-#    seaborn.despine()
+
+#Univariate views of cholesterol and age
+cleveland_data['agebin']=pd.DataFrame(pd.qcut(cleveland_data['age'], 10))
+plt.figure() 
+ax = cleveland_data[['num','agebin']].sort('agebin').groupby(['agebin'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+
+import seaborn
+cleveland_data['cholbin']=pd.DataFrame(pd.qcut(cleveland_data['chol'], 10))
+plt.figure() 
+cleveland_data['cholbin_fixed']=[int(item[1:4]) for item in cleveland_data['cholbin']]
+ax=cleveland_data[['num','cholbin_fixed']].sort('cholbin_fixed').groupby(['cholbin_fixed'])['num'].mean().plot()
+for tick in ax.get_xticklabels():
+        tick.set_rotation(45)
+plt.xlabel('Cholesterol')
+plt.ylabel('Average heart disease')
+seaborn.axes_style('white')
+seaborn.despine
 
 ##Calibrating lasso parameter
 from pprint import pprint
@@ -144,6 +145,13 @@ Y_test['num_capped']=Y_test['num'].replace([2,3,4],[1,1,1])
 pprint(zip(X.columns.values,lassomodel.coef_))
 print mean_squared_error(Y_test['num'],Y_test['prediction'])
 #print lassomodel.intercept_
+        
+with seaborn.axes_style('white'):
+    Y_test.boxplot(column='prediction',by='num')
+    plt.xlabel('# Vessels with >50% narrowing')
+    plt.ylabel('Model Prediction')
+    plt.title('Boxplots of predictions by true target')
+    seaborn.despine()
 
 # Compute ROC curve and ROC area for each class
 fpr, tpr, _ = metrics.roc_curve(Y_test['num_capped'], Y_test['prediction'])

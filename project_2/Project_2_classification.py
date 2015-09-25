@@ -10,6 +10,7 @@ from sklearn.cross_validation import cross_val_score
 from sklearn.cross_validation import KFold
 from sklearn import metrics
 import re
+import seaborn
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -89,7 +90,6 @@ print variable_importance
 #for tick in ax.get_xticklabels():
 #        tick.set_rotation(45)
 
-import seaborn
 #with seaborn.axes_style('white'):
 #    Y_test.boxplot(column='prediction',by='num')
 #    seaborn.despine()
@@ -210,7 +210,7 @@ print 'Naive Bayes (Gaussian) accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_
 from sklearn.svm import SVC
 model = SVC().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'SVM Classifier accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'SVM Classifier accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.recall_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.precision_score(Y_test, Y_test_pred)
 print 'SVM Classifier accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
@@ -221,20 +221,18 @@ print 'SVM Classifier accuracy: %.4f' % metrics.f1_score(Y_test, Y_test_pred)
 from sklearn.tree import DecisionTreeClassifier
 model = DecisionTreeClassifier().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'Decision Tree accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'Decision Tree accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
 
 ###============ Random Forest ===============
 
 from sklearn.ensemble import RandomForestClassifier
 model = RandomForestClassifier().fit(X_train, Y_train)
 Y_test_pred = model.predict(X_test)
-print 'Random Forest accuracy: %.4f' % accuracy_score(Y_test, Y_test_pred)
+print 'Random Forest accuracy: %.4f' % metrics.accuracy_score(Y_test, Y_test_pred)
 
 ###============ Model Comparision ==========
-from sklearn.cross_validation import cross_val_score
-
 names, accs = [],[]
-for algorithm in (LogisticRegression, 
+for algorithm in (linear_model.LogisticRegression, 
                   KNeighborsClassifier,
                   GaussianNB,
                   SVC,
